@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f5f0;   /* Soft cream */
+  color: #111;                 /* Deep black */
+}
+
+.navbar {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 80px;
+  background-color: #f8f5f0;  /* Cream */
+}
+
+
+
+.navbar nav {
+  display: flex;
+  gap: 30px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #111;   /* Black */
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.logo {
+  color: #111;
+}
+
+
+
+.navbar a:hover {
+  opacity: 0.6;
+}
+
+
+.hero {
+  position: relative;
+  height: 100vh;
+  background-image: url("https://images.unsplash.com/photo-1529634898454-08f7a2c8f8c9");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  z-index: 1;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);  /* Softer overlay */
+  z-index: 0;
+}
+
+
+.hero h1 {
+  position: relative;
+  font-size: 52px;
+  font-weight: 300;
+  letter-spacing: 3px;
+}
+
+
+
