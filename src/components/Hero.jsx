@@ -1,50 +1,44 @@
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
-function Hero({ title, subtitle, image }) {
+const Hero = () => {
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-screen">
       {/* Background Image */}
-      <div
+      <div 
         className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: image
-            ? `url(${image})`
-            : 'linear-gradient(to bottom, #4a5568, #2d3748)',
-        }}
+        style={{ backgroundImage: "url('/images/home/hero-background.jpg')" }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-40" />
+        <div className="absolute inset-0 bg-black/30" />
       </div>
 
       {/* Content */}
-      <div className="relative h-full flex items-center justify-center text-center px-6">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h1 className="text-5xl md:text-7xl font-serif text-white mb-6">
-            {title || 'Capturing Love Stories'}
+          <h1 className="text-6xl md:text-8xl font-serif mb-4 tracking-wider">
+            WEDDINGS BY PRU
           </h1>
-          {subtitle && (
-            <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
-              {subtitle}
-            </p>
-          )}
+          <p className="text-xl md:text-2xl tracking-[0.3em] font-light">
+            TIMELESS WEDDING PHOTOGRAPHY
+          </p>
+        </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-10"
+        >
+          <ChevronDown className="w-8 h-8 animate-bounce" />
         </motion.div>
       </div>
+    </section>
+  );
+};
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-        <div className="w-6 h-10 border-2 border-white rounded-full flex items-start justify-center p-2">
-          <motion.div
-            className="w-1 h-2 bg-white rounded-full"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          />
-        </div>
-      </div>
-    </div>
-  )
-}
-
-export default Hero
+export default Hero;

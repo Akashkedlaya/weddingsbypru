@@ -1,18 +1,19 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { Menu, X } from 'lucide-react'
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 
-function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -20,7 +21,7 @@ function Navbar() {
     { name: 'Films', path: '/films' },
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
-  ]
+  ];
 
   return (
     <nav
@@ -28,61 +29,71 @@ function Navbar() {
         isScrolled ? 'bg-white shadow-md py-4' : 'bg-transparent py-6'
       }`}
     >
-      <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="text-2xl font-serif font-bold">
-            <span className={isScrolled ? 'text-gray-800' : 'text-white'}>
-              Weddings by Pru
-            </span>
-          </Link>
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        {/* Logo - Image */}
+        <Link to="/" className="flex items-center">
+          <img
+            src="/images/logo.png"
+            alt="Weddings by Pru"
+            className={`transition-all duration-300 ${
+              isScrolled ? 'h-12' : 'h-16'
+            }`}
+          />
+        </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex space-x-8">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              to={link.path}
+              className={`text-sm tracking-wider transition-colors ${
+                location.pathname === link.path
+                  ? isScrolled
+                    ? 'text-gray-900 font-semibold'
+                    : 'text-white font-semibold'
+                  : isScrolled
+                  ? 'text-gray-700 hover:text-gray-900'
+                  : 'text-white/90 hover:text-white'
+              }`}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className={`md:hidden ${isScrolled ? 'text-gray-900' : 'text-white'}`}
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-white shadow-lg">
+          <div className="px-6 py-4 space-y-3">
             {navLinks.map((link) => (
               <Link
-                key={link.path}
+                key={link.name}
                 to={link.path}
-                className={`font-medium transition-colors hover:text-gray-600 ${
-                  isScrolled ? 'text-gray-800' : 'text-white'
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`block text-sm tracking-wider ${
+                  location.pathname === link.path
+                    ? 'text-gray-900 font-semibold'
+                    : 'text-gray-700'
                 }`}
               >
                 {link.name}
               </Link>
             ))}
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? (
-              <X className={isScrolled ? 'text-gray-800' : 'text-white'} />
-            ) : (
-              <Menu className={isScrolled ? 'text-gray-800' : 'text-white'} />
-            )}
-          </button>
         </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 bg-white rounded-lg shadow-lg">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className="block py-3 px-4 text-gray-800 hover:bg-gray-100"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
+      )}
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

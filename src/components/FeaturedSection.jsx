@@ -1,4 +1,4 @@
-import WeddingGrid from "./ImageGrid"
+//import WeddingGrid from "./ImageGrid"
 
 function FeaturedSection() {
   return (
@@ -9,4 +9,4 @@ function FeaturedSection() {
   )
 }
 
-export default FeaturedSection
+export default FeaturedSection 
