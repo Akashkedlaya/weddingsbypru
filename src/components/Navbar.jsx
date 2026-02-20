@@ -26,19 +26,27 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-4' : 'bg-transparent py-6'
+        isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* Logo - Image */}
+        {/* Logo - Switches between white and black based on scroll */}
         <Link to="/" className="flex items-center">
-          <img
-            src="/images/logo.png"
-            alt="Weddings by Pru"
-            className={`transition-all duration-300 ${
-              isScrolled ? 'h-12' : 'h-16'
-            }`}
-          />
+          {isScrolled ? (
+            // Black logo for white background (scrolled)
+            <img
+              src="/images/logo.png"
+              alt="Weddings by Pru"
+              className="h-6 md:h-10 transition-all duration-300"
+            />
+          ) : (
+            // White logo for transparent background (top)
+            <img
+              src="/images/logo-white.png"
+              alt="Weddings by Pru"
+              className="h-14 md:h-16 transition-all duration-300"
+            />
+          )}
         </Link>
 
         {/* Desktop Navigation */}
