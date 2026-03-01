@@ -2,49 +2,54 @@ import { motion } from 'framer-motion';
 
 const SoulCinema = () => {
   return (
-    <section className="relative py-32 overflow-hidden bg-[#f5f2ed]">
-      <div className="absolute inset-0">
-        <div 
-          className="absolute w-full h-[120%] bg-cover bg-center will-change-transform"
-          style={{
-            backgroundImage: `url('/images/home/soul-cinema-bg.jpg')`,
-            transform: 'skewY(-3deg)',
-            transformOrigin: 'top left',
-            filter: 'grayscale(100%)',
-          }}
-        >
-          <div className="absolute inset-0 bg-black/40" />
-        </div>
+    <section className="relative py-16 md:py-24 overflow-hidden my-8 md:my-16">
+      <div 
+        className="absolute inset-0 bg-cover bg-center transform -skew-y-1 scale-105"
+        style={{ 
+          backgroundImage: "url('/images/home/soul-cinema-bg.webp')",
+          filter: 'grayscale(100%)'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center text-white">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 text-white">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-50px" }}
+          style={{ willChange: 'transform' }}
+          className="text-center"
         >
-          <h2 className="text-7xl md:text-8xl font-serif mb-8 tracking-wider">
-            SOUL+CINEMA
+          {/* Main Title - Better Mobile Wrapping */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif mb-4 tracking-[0.1em] md:tracking-[0.15em] leading-tight px-4">
+            <span className="block">REAL-MOMENTS,</span>
+            <span className="block">ARTFULLY-TOLD.</span>
           </h2>
           
-          <p className="text-lg leading-relaxed max-w-2xl mx-auto opacity-90">
-            Every wedding is unique and so are our films. For past 8 years we have set new benchmarks of 
-            storytelling within wedding realm and beyond. We are fortunate to have experienced so unique 
-            cultures and traditions across 25 countries and to document stories that continuously overwhelm us.
+          {/* Subtitle */}
+          <p className="text-xs md:text-sm tracking-[0.3em] opacity-80 mb-10 md:mb-12 uppercase">
+            Award Winning Films
           </p>
+
+          {/* Description Text - Better Mobile Wrapping */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto"
+          >
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed font-light px-2 sm:px-4">
+              Every wedding is unique and so are our films. For past 8 years we have set new 
+              benchmarks of storytelling within wedding realm and beyond. We are fortunate to 
+              have experienced so unique cultures and traditions across India and to document 
+              stories that continuously overwhelm us.
+            </p>
+          </motion.div>
         </motion.div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-        viewport={{ once: true, margin: "-50px" }}
-        className="relative z-10 mt-20 text-center"
-      >
-        <h3 className="text-4xl font-serif text-gray-800">AWARD WINNING FILMS</h3>
-      </motion.div>
     </section>
   );
 };

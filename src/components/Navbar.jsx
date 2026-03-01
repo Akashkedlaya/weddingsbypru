@@ -7,6 +7,8 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
+  const isHomePage = location.pathname === '/';
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -15,32 +17,31 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const showWhiteBg = !isHomePage || isScrolled;
+
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Photography', path: '/photography' },
     { name: 'Films', path: '/films' },
     { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Contact Us', path: '/contact' },
   ];
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
+        showWhiteBg ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* Logo - Switches between white and black based on scroll */}
         <Link to="/" className="flex items-center">
-          {isScrolled ? (
-            // Black logo for white background (scrolled)
+          {showWhiteBg ? (
             <img
               src="/images/logo.png"
               alt="Weddings by Pru"
-              className="h-6 md:h-10 transition-all duration-300"
+              className="h-12 md:h-14 transition-all duration-300"
             />
           ) : (
-            // White logo for transparent background (top)
             <img
               src="/images/logo-white.png"
               alt="Weddings by Pru"
@@ -49,7 +50,6 @@ const Navbar = () => {
           )}
         </Link>
 
-        {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-8">
           {navLinks.map((link) => (
             <Link
@@ -57,10 +57,10 @@ const Navbar = () => {
               to={link.path}
               className={`text-sm tracking-wider transition-colors ${
                 location.pathname === link.path
-                  ? isScrolled
+                  ? showWhiteBg
                     ? 'text-gray-900 font-semibold'
                     : 'text-white font-semibold'
-                  : isScrolled
+                  : showWhiteBg
                   ? 'text-gray-700 hover:text-gray-900'
                   : 'text-white/90 hover:text-white'
               }`}
@@ -70,28 +70,26 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className={`md:hidden ${isScrolled ? 'text-gray-900' : 'text-white'}`}
+          className={`md:hidden ${showWhiteBg ? 'text-gray-900' : 'text-white'}`}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg">
-          <div className="px-6 py-4 space-y-3">
+        <div className="md:hidden bg-[#f5f2ed] shadow-lg border-t border-gray-200">
+          <div className="px-6 py-6 space-y-4">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`block text-sm tracking-wider ${
+                className={`block text-base tracking-wider transition-colors ${
                   location.pathname === link.path
                     ? 'text-gray-900 font-semibold'
-                    : 'text-gray-700'
+                    : 'text-gray-700 hover:text-gray-900'
                 }`}
               >
                 {link.name}

@@ -7,30 +7,26 @@ const GalleryPreview = () => {
     {
       id: 1,
       title: 'Traditional',
-      image: '/images/home/gallery-preview-1.jpg',
+      image: '/images/home/gallery-preview-1.webp',
       description: 'Classic ceremonies',
-      path: '/traditional',
     },
     {
       id: 2,
       title: 'Destination',
-      image: '/images/home/gallery-preview-2.jpg',
+      image: '/images/home/gallery-preview-2.webp',
       description: 'Exotic locations',
-      path: '/destination',
     },
     {
       id: 3,
       title: 'Pre-Wedding',
-      image: '/images/home/gallery-preview-3.jpg',
+      image: '/images/home/gallery-preview-3.webp',
       description: 'Love stories',
-      path: '/prewedding',
     },
     {
       id: 4,
       title: 'Candid',
-      image: '/images/home/gallery-preview-4.jpg',
+      image: '/images/home/gallery-preview-4.webp',
       description: 'Real moments',
-      path: '/candid',
     },
   ];
 
@@ -52,49 +48,39 @@ const GalleryPreview = () => {
           </p>
         </motion.div>
 
+        {/* Image Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {categories.map((category, index) => (
-            <Link
+            <motion.div
               key={category.id}
-              to={category.path}
-              className="block"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="relative aspect-[3/4] overflow-hidden group rounded-lg"
             >
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="relative aspect-[3/4] overflow-hidden group cursor-pointer rounded-lg"
-              >
-                <img
-                  src={category.image}
-                  alt={category.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-                />
-                
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                
-                <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                  <h3 className="text-2xl font-serif mb-1 transform transition-transform duration-300 group-hover:translate-y-[-4px]">
-                    {category.title}
-                  </h3>
-                  <p className="text-sm opacity-90 mb-3">
-                    {category.description}
-                  </p>
-                  
-                  <div className="flex items-center text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="mr-2">View Gallery</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-              </motion.div>
-            </Link>
+              <img
+                src={category.image}
+                alt={category.title}
+                loading="lazy"
+                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+              />
+              
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              
+              <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
+                <h3 className="text-2xl font-serif mb-1">
+                  {category.title}
+                </h3>
+                <p className="text-sm opacity-90">
+                  {category.description}
+                </p>
+              </div>
+            </motion.div>
           ))}
         </div>
 
+        {/* View Full Gallery Button */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

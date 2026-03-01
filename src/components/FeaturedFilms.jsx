@@ -11,28 +11,28 @@ const FeaturedFilms = () => {
       id: 1,
       couple: 'ALBERTO & APPORVA',
       location: 'Bangalore, India',
-      thumbnail: '/images/home/featured-film-1.jpg',
+      thumbnail: '/images/home/featured-film-1.webp',
       youtubeId: 'srUzSJAsXyw', // Replace with your actual YouTube video ID
     },
     {
       id: 2,
       couple: 'KEVIN & ROSHINI',
       location: 'Bangalore, India',
-      thumbnail: '/images/home/featured-film-2.jpg',
+      thumbnail: '/images/home/featured-film-2.webp',
       youtubeId: 'xtvv8K5yjJc', // Replace with your actual YouTube video ID
     },
     {
       id: 3,
       couple: 'SRINIVAS & KAJOL',
       location: 'Bangalore, India',
-      thumbnail: '/images/home/featured-film-3.jpg',
+      thumbnail: '/images/home/featured-film-3.webp',
       youtubeId: 'jDZ3_hsIMJI', // Replace with your actual YouTube video ID
     },
     {
       id: 4,
       couple: 'VAIBHAV & PRAKRUTHI',
       location: 'Bangalore, India',
-      thumbnail: '/images/home/featured-film-4.jpg',
+      thumbnail: '/images/home/featured-film-4.webp',
       youtubeId: 'qGLzKAOMvPE', // Replace with your actual YouTube video ID
     },
   ];
